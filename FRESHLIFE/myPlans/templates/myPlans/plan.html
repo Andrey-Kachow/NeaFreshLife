@@ -1,0 +1,33 @@
+{% extends "mainApp/wrapper.html" %}
+{% load staticfiles %}
+{% block title %}{{ user.username }}'s {{plan.name}}{% endblock %}
+
+{% block style %}
+<style>
+    a {text-decoration:none;}
+    #plan {
+        width: 80%;
+        margin: auto;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="plan">
+    <h1>{{plan.name}}</h1>
+    <h5>Created: {{plan.date|date:"d/m/Y"}} at {{plan.date|date:"h:i:s"}}</h5>
+    {% for meal in meals %}
+        <h3>Meal {{meal.index}}</h3>
+        {% for ingridient in meal.meal_has_food_set.all %}
+            <h5>{{ingridient.food.name}} - {{ingridient.portion_size}}{{ingridient.food.unit}} </h5>
+        {% endfor %}
+    {% endfor %}
+    <a href="{% url 'myPlans:delete' pk=plan.pk %}">
+        <button>Delete plan</button>  <!--Delete button-->
+    </a>
+    <a href="{% url 'myPlans:plans' %}">
+        <button>Back to my meal plans</button>
+    </a>
+</div>
+{% endblock %}
+

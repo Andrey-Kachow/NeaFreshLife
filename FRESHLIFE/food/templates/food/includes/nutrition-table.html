@@ -1,0 +1,120 @@
+<div class="nutritional-table">
+    <div class="ntr-table__label">
+        <div class="ntr-sign">
+            +
+        </div>
+        <div>Nutritional Values</div>
+        {# <div></div> #}
+    </div>
+    <div class="nutrient">
+        <div class="nutrient__name">
+            Energy
+        </div>
+        <div class="nutrient__value">
+            {{ item.calories }}
+        </div>
+        <div class="nutrient__unit">kcal</div>
+    </div>
+    <div class="nutrient ntr-lvl-2">
+        <div class="nutrient__name"></div>
+        <div class="nutrient__value of-which">
+            {{ item.joules | floatformat }}
+        </div>
+        <div class="nutrient__unit">kJ</div>
+    </div>
+    <div class="nutrient">
+        <div class="nutrient__name">
+            Fat
+        </div>
+        <div class="nutrient__value">
+            {{ item.fat | floatformat }}
+        </div>
+        <div class="nutrient__unit">g</div>
+    </div>
+    {% if item.fat > 3 %}
+        <div class="nutrient of-which">
+            of which:
+        </div>
+        <div class="nutrient ntr-lvl-2">
+            <div class="nutrient__name">
+                Saturated
+            </div>
+            <div class="nutrient__value">
+                {{ item.saturated_fat | floatformat }}
+            </div>
+            <div class="nutrient__unit">g</div>
+        </div>
+        {% if item.polyunsaturated %}
+            <div class="nutrient ntr-lvl-2">
+                <div class="nutrient__name">
+                    Polyunsaturated
+                </div>
+                <div class="nutrient__value">
+                    {{ item.polyunsaturated | floatformat }}
+                </div>
+                <div class="nutrient__unit">g</div>
+            </div>
+        {% endif %}
+        {% if item.monounsaturated %}
+            <div class="nutrient ntr-lvl-2">
+                <div class="nutrient__name">
+                    Monounsaturated
+                </div>
+                <div class="nutrient__value">
+                    {{ item.monounsaturated | floatformat }}
+                </div>
+                <div class="nutrient__unit">g</div>
+            </div>
+        {% endif %}
+    {% endif %}
+    <div class="nutrient">
+        <div class="nutrient__name">
+            Cholesterol
+        </div>
+        <div class="nutrient__value">
+            {{ item.cholesterol_mg }}
+        </div>
+        <div class="nutrient__unit">mg</div>
+    </div>
+    <div class="nutrient">
+        <div class="nutrient__name">
+            Carbohydrates
+        </div>
+        <div class="nutrient__value">
+            {{ item.carbs | floatformat }}
+        </div>
+        <div class="nutrient__unit">g</div>
+    </div>
+    {% if item.carbs %}
+        <div class="nutrient of-which">
+            of which:
+        </div>
+        <div class="nutrient ntr-lvl-2">
+            <div class="nutrient__name">
+                Sugars
+            </div>
+            <div class="nutrient__value">
+                {{ item.sugars| floatformat }}
+            </div>
+            <div class="nutrient__unit">g</div>
+        </div>
+    {% endif %}
+    <div class="nutrient">
+        <div class="nutrient__name">
+            Fibre
+        </div>
+        <div class="nutrient__value">
+            {{ item.fibre | floatformat }}
+        </div>
+        <div class="nutrient__unit">g</div>
+    </div>
+    <div class="nutrient">
+        <div class="nutrient__name">
+            Protein
+        </div>
+        <div class="nutrient__value">
+            {{ item.protein | floatformat }}
+        </div>
+        <div class="nutrient__unit">g</div>
+    </div>
+</div>

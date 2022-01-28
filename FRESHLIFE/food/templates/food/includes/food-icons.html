@@ -1,0 +1,22 @@
+{% if user not in item.loved_by.all %}
+    <a id="str_{{ item.pk }}"
+       class="fas fa-star ico--inactive"
+    href="{% url 'food:add_to_favourite' pk=item.pk %}">
+    </a>
+{% else %}
+    <a id="str_{{ item.pk }}"
+       class="fas fa-star ico--yellow"
+       href="{% url 'food:remove_from_favourite' pk=item.pk %}">
+    </a>
+{% endif %}
+{% if user not in item.ignored_by.all %}
+    <a id="ban_{{ item.pk }}"
+       class="fas fa-ban ico--inactive"
+       href="{% url 'food:add_to_ignore' pk=item.pk %}">
+    </a>
+{% else %}
+    <a id="ban_{{ item.pk }}"
+       class="fas fa-ban ico--red"
+       href="{% url 'food:remove_from_ignore' pk=item.pk %}">
+    </a>
+{% endif %}

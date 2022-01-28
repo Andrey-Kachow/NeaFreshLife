@@ -1,0 +1,40 @@
+{% extends "mainApp/wrapper.html" %}
+{% load staticfiles %} {% load static %}
+{% block title %}Food{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/food.css' %}?v={{ request.user.latest_inputs.random_v }}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/food_item.css' %}?v={{ request.user.latest_inputs.random_v }}" type="text/css"/>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/food.js' %}?v={{ request.user.latest_inputs.random_v }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="name-n-btns2">
+    <label class="food-name">{{ item.name }}</label>
+    {% include 'food/includes/food-icons.html' %}
+    <a href="{% url 'food:food' %}">Come back</a>
+</div>
+<div class="item-content">
+    <div class="image-and-table">
+        {% include 'food/includes/nutrition-table.html' %}
+        <img class="food_item__img" src="{{ item.image.url }}">
+    </div>
+    {{ item.description }}
+</div>
+
+{% endblock %}
+
+<!--<div class="name-n-btns">-->
+
+<!--</div>-->
+<!--<div class="item-content">&lt;!&ndash;food name and butttons&ndash;&gt;-->
+<!--    <div class="img-and-table">-->
+<!--        <div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="item-description">-->
+<!--    </div>-->
+<!--</div>-->

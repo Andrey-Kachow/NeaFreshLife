@@ -1,0 +1,39 @@
+{% extends "mainApp/wrapper.html" %}
+{% block title %}Freshlife228 - Login{% endblock %}
+{% load staticfiles %}
+{% block style %}
+<style>
+    #loginform {
+        border: 3px solid #1111ff;
+        border-top: none; border-bottom: none;
+        width: 33%; margin:0 auto; padding: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="loginform">
+    <h3>Login</h3>
+
+    {% if form.errors %}
+    <p>There's something wrong with what you entered!</p>
+    {% endif %}
+    {% if next %}
+    <p>Hey, you can't access that page</p>
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <p>Username: {{ form.username }}</p>
+        <p>Password: {{ form.password }}</p>
+        <p><button type="submit">Login</button></p>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+    <div>
+        <h4> Don't have an account?</h4>
+        <a href="{% url 'mainApp:register' %}">
+            <button>Create account</button>
+        </a>
+    </div>
+</div>
+{% endblock %}

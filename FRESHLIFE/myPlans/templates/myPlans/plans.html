@@ -1,0 +1,48 @@
+{% extends "mainApp/wrapper.html" %}
+{% load staticfiles %}
+{% block title %}{{ user.username }}'s plans{% endblock %}
+
+{% block style %}
+<style>
+    a {text-decoration:none;}
+    .header3{text-decoration: underline;}
+    h1 {text-align:center;}
+    #plans {
+        width: 80%;
+        margin: auto; padding:;
+    }
+    .plan_in_list {
+        border: 2px solid #11f;
+        margin: 5px;
+        padding: 0 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="plans">
+    <h1>My meal plans</h1>
+    {% if plans %}
+        {% for plan in plans %}
+            <div class="plan_in_list">
+                <a class="header3" href="{% url 'myPlans:plan' index=forloop.counter %}">
+                    <h3>{{plan.name}} </h3>
+                </a>
+                <h5>Created: {{plan.date|date:"d/m/Y"}} at {{plan.date|date:"h:i:s"}}</h5>
+                <a href="{% url 'myPlans:plan' index=forloop.counter %}">
+                    <button>View plan</button> <!--View button-->
+                </a>
+                <a href="{% url 'myPlans:delete' pk=plan.pk %}">
+                    <button>Delete</button>  <!--Delete button-->
+                </a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h3>There are no meal plans created</h3>
+    {% endif %}
+    <a href="{% url 'mainApp:mainPage' %}">
+        <button>Back</button>
+    </a>
+</div>
+{% endblock %}
+

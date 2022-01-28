@@ -1,0 +1,86 @@
+<!--remove '?v=...' from static urls when run in production -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v={{ request.user.latest_inputs.random_v }}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/wrapper.css' %}?v={{ request.user.latest_inputs.random_v }}" type="text/css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+          crossorigin="anonymous">
+    {% block style %}{% endblock %} <!--for css files or code-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous">
+    </script>
+</head>
+<body>
+    {% csrf_token %} <!--Do not remove-->
+    <header class="whole-width-block">
+        <img id="nav-menu-ico--off" class="ico-button"
+             src="{% static 'image/menu-ico-off.png' %}" onclick="openAsideMenu()">
+        <img id="nav-menu-ico--on" class="ico-button"
+             src="{% static 'image/menu-ico-on.png' %}" onclick="closeAsideMenu()">
+        <div class="header__title">
+            <a class="box-link" href="/">
+                <p id="header__p">
+                    <span id="header-health">Health</span>
+                    <span id="header-and">and</span>
+                    <span id="header-fitness">Fitness</span>
+<!--{#                    <a href="#"><i class="fas fa-user-circle"></i></a>#}-->
+                </p>
+            </a>
+        </div>
+    </header>
+    <div class="container row">
+        <aside id="nav-menu">
+            <div class="aside-fixer"><div class="extra-darkness-on-top"></div></div>
+            <a class="box-link" href="/">
+                <div class="aside__navbtn">
+                    <i class="fas fa-home aside-icon"></i> Home
+                </div>
+            </a>
+            <a class="box-link" href="{% url 'calc:calculator' %}">
+                <div class="aside__navbtn">
+                    <i class="fas fa-calculator aside-icon"></i> Calorie Calculator
+                </div>
+            </a>
+            <a class="box-link" href="{% url 'planner:meal_planner' %}">
+                <div class="aside__navbtn">
+                    <i class="fas fa-clipboard-list aside-icon"></i> Meal Planner
+                </div>
+            </a>
+            <a class="box-link" href="{% url 'myPlans:plans' %}">
+                <div class="aside__navbtn">
+                    <i class="fas fa-address-book aside-icon"></i> My Meal Plans
+                </div>
+            </a>
+            <a class="box-link" href="{% url 'food:food' %}">
+                <div class="aside__navbtn">
+                    <i class="fas fa-utensils aside-icon"></i> Food
+                </div>
+            </a>
+            <a class="box-link" href="{% url 'mainApp:logout_user' %}">
+                <div class="aside__navbtn">
+                    <i class="fas fa-sign-out-alt aside-icon"></i> Logout
+                </div>
+            </a>
+        </aside>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+    <footer class="whole-width-block">
+        Health and Fitness 2019
+        <!--Freshlife228 2018-->
+    </footer>
+    <script type="text/javascript" src="{% static 'js/wrapper.js' %}?v={{ request.user.latest_inputs.random_v }}"></script>
+    {% block script %}{% endblock %}
+</body>
+</html>
+

@@ -1,0 +1,47 @@
+{% extends "mainApp/wrapper.html" %}
+{% block title %}Freshlife228 - Login{% endblock %}
+{% load staticfiles %}
+
+{% block style %}
+<style>
+    #registerform {
+        border: 3px solid #1111ff;
+        border-top: none; border-bottom: none;
+        width: 50%;
+        margin:0 auto; padding: 20px;
+    }
+    ul, .helptext {
+       font-size:12px;
+    }
+    input {border: 1px solid #1111ff;}
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="registerform">
+    <h2>Registration page</h2>
+
+    <form method="post" action="{% url 'mainApp:register' %}">
+        {% csrf_token %}
+        {% if form.errors %}
+        <p>There are errors in the form!</p>
+        {% endif %}
+        <!--{{ form.as_p }}-->
+        <p><label>Username:</label>  {{form.username}}</p>
+        <p><label>Password:</label>  {{form.password1}}</p>
+        <p><label>Confirm password:</label>  {{form.password2}}</p>
+
+        <span class="helptext">
+            Username must contain less than 150 characters. <br/>
+            Acceptable characters are: letters, digits and @/./+/-/_ only.
+        </span>
+        <ul>
+            <li>Your password can't be too similar to your other personal information.</li>
+            <li>Your password must contain at least 8 characters.</li>
+            <li>Your password can't be a commonly used password.</li>
+            <li>Your password can't be entirely numeric.</li>
+        </ul>
+        <button type="submit">Register</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+#area {
+    margin: 5px auto;
+}
+#results {
+    padding: 10px;
+}
+.user-entry {
+    background-color: #D7EDAB;
+    margin: 5px;
+    padding: 5px;
+}
+#bfradio {
+    margin: 15px auto;
+}
+#bfimg {
+}
+#advanced_calc {
+    display: none;
+}
+#sneaky {
+    display: none;
+}
+#hours {
+    width:50px;
+}
+@media screen and (min-width: 425px) {
+
+}
+
+@media screen and (min-width: 768px) {
+
+}

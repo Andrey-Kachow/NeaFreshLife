@@ -1,0 +1,117 @@
+#suggestions {
+    max-height: 0;
+    width: auto;
+    margin:0 auto 15px auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    -webkit-transition: all 3s linear;
+    -moz-transition: all 3s linear;
+    -o-transition: all 3s linear;
+    transition: all 3s linear;
+} .sug-tr {
+    overflow: hidden;
+} #suggestions-opener {
+    padding: 5px;
+    max-height: 30px;
+    -webkit-transition: all 1s linear;
+    -moz-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+}
+.suggestions__item {
+    text-align: center;
+    background-color: #D7EDAB;
+    color: #091D34;
+} .suggestions__item:nth-child(2n) {
+    background-color: #EBF7D4;
+}
+
+.addfood-img--suggestion {
+    width: 100%; /* 1.5 */
+    /*border-radius: 5px;*/
+    /*margin: auto;  */
+}
+#search__bar {
+    height: 32px;
+    padding: 0;
+    color: white;
+    background-color: #98CA32;
+}
+.search__bar__form {
+    float:left;
+}
+input.search {
+    height: 24px;
+    margin: 4px 0px 4px 4px;
+}
+button.search {
+    height: 24px;
+    margin: 4px 4px 4px -2px;
+    color: #EBF7D4;
+    font-size: 16px;
+    vertical-align: bottom;
+    /*transform: translate(0, 3px);*/
+}
+.results-for-x {
+    padding: 5px;
+}
+#search-results {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.food-item {
+    border-radius: 5px;
+    background-color: #D7EDAB;
+}
+.food-item:nth-child(2n) {
+    background-color: #EBF7D4;
+}
+.name-n-btns {
+    padding: 5px;
+    width:100%;
+    font-size: 1.2rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+}
+.food-name {
+}
+
+a.fa-star, a.fa-ban {
+}
+a.ico--inactive, a.ico--inactive:visited {
+    color: grey;
+}
+a.ico--yellow, a.ico--yellow:visited {
+    color: #ffd712;
+    text-shadow: 1px 1px 3px #555555;
+}
+a.ico--red, a.ico--red:visited {
+    color: #ff5514;
+    text-shadow: 1px 1px 3px #770000;
+}
+
+@media screen and (min-width: 425px) {
+
+}
+
+@media screen and (min-width: 768px) {
+    #search-results {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media screen and (min-width: 1200px) {
+    #search-results {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+/*#D7EDAB*/
+
+/*.search__bar__nav {*/
+  /*float:right;*/
+  /*height: 100%;*/
+/*}*/
+/*button.nav-button {*/
+    /*float:right;*/
+    /*height:100%;*/
+    /*margin: 0 0;*/
+/*}*/

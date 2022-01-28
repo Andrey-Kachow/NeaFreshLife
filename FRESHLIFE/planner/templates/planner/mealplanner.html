@@ -1,0 +1,109 @@
+{% extends "mainApp/wrapper.html" %}
+{% load staticfiles %}
+{% block title %}Freshlife228 - Meal planner{% endblock %}
+
+{% block style %}
+<style>
+    a {text-decoration: none;}
+    #setup {
+        width:85%; margin:auto;
+    }
+    .setting{margin:5px; display:inline;}
+    #meal_display {
+        border-top: 3px solid #1111ff;
+        padding: 10px;
+    }
+    .stealth {
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="setup">
+    <h1>
+        Meal Planner
+        <a href="{% url 'mainApp:mainPage' %}">
+            <button type="button" style="float:right;"> Go to Main Menu</button>
+        </a>
+    </h1>
+    <form method="post" style="margin-bottom:5px;"> <!--form for meal details-->
+        {% csrf_token %}
+        <fieldset> <!--Weight-->
+            <legend>Weight</legend>
+            <input name="weight" type="number" value="{{ user.latest_inputs.weight }}"
+                   min="1" step="0.01" placeholder="weight" required> Kg
+        </fieldset>
+        <fieldset> <!--values of weight and calories have auto fill (latest_inputs)-->
+            <legend>Daily calories intake</legend>
+            <input name="calories" type="number"
+                   value="{{ user.latest_inputs.calories }}"
+                   min="0" required>
+            <a href="{% url 'calc:calculator2' user_came_from_planner=1 %}">
+                <button type="button">Use calculator to fill the field</button>
+            </a> or enter the value manualy
+        </fieldset>
+        <fieldset id="settings"><!--Diet entries-->
+            <legend>Diet settings</legend>
+            <div class="setting"><!--Types of diet-->
+                Choice of diet:
+                <select name="diet"><!--Choice between three diets-->
+                    <option value="[1.5, 0.9, 0]">Low fat diet</option>
+                    <option value="[2, 0, 1.3]">Low carb diet</option>
+                    <option value="[2.0, 1.2, 0]">High protein diet</option>
+                </select>
+            </div>
+            <div class="setting"><!--Number of meals entry. Default: 3-->
+                Number of Meals:
+                <input type="number" name="meal_num" value="3" min="1" max="9"> <!--number of meals-->
+            </div>
+            <div class="setting"><!-- Favourite food checkbox here-->
+                <label><input type="checkbox" name="fav_checkbox">
+                    Use favourite food only</label>
+            </div>
+        </fieldset>
+        <input type="submit" name="create" class="ocb" value="Create meal plan"> <!--CREATE button-->
+    </form>
+</div>
+<div id="meal_display">
+    {% if not enough_favourites %}
+        <p>Unfortunately, meal plan cannot be created.</p>
+        <p>{{ reasons }}Please, add more food to your favourites.</p>
+        <a href="{% url 'food:addfood' %}">
+            <button type="button">Add favourite food</button> <!--Button to the Add Food-->
+        </a>
+    {% elif plan %}
+    <form method="post"> <!--Form with hidden inputs which are filled by the server.-->
+        <!--It contains all the information for the DB to be saved. User just presses 'save'-->
+        {% csrf_token %}
+            <!-- hidden information about plan -->
+            <input class="stealth" name="meal_num" type="number" value="{{ plan|length }}">
+            <input class="stealth" name="three_or_four" type="number" value="{{ plan.1|length }}">
+            {% for meal in plan %} <!-- display the meals in plan-->
+                <div class="meal_div">
+                    <h3>Meal {{ forloop.counter }}</h3>
+                    {% with outer=forloop %}
+                        {% for food in meal %} <!-- display food in the meal -->
+                            <h4>{{ food.0 }} - {{ food.1 }} {{ food.2 }}</h4>
+                            <input class="stealth"
+                                   name="food_{{outer.counter}}{{forloop.counter}}"
+                                   type="text"
+                                   value="{{ food.0 }}"><!--hidden input of the food name-->
+                            <input class="stealth"
+                                   name="serving_{{outer.counter}}{{forloop.counter}}"
+                                   type="number"
+                                   value="{{ food.1 }}"><!--hidden input of the food serving size-->
+                        {% endfor %}
+                    {% endwith %}
+                </div>
+            {% endfor %}
+        <fieldset> <!-- visible part of the form -->
+            <legend>You can save the plan here</legend>
+            <input type="text" name="plan_name" placeholder="Name of the meal plan" required>
+            <input type="submit" name="save" class="ocb" value="save"> <!--SAVE button-->
+        </fieldset>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}
+

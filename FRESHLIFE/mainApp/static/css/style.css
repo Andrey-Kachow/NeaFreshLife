@@ -1,0 +1,127 @@
+/* clearfix from css-tricks.com/snippets/css/clear-fix/ */
+.row:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+.row { display: inline-block; }
+/* start commented backslash hack \*/
+* html .row { height: 1%; }
+.row { display: block; }
+/* close commented backslash hack */
+
+/* general settings -----------------------------------------------*/
+* {
+    box-sizing: border-box;
+}
+/*transition: all 250ms ease-out;*/
+
+body {
+	margin: 0;
+    color: #091D34;
+    background: #F0F7D4;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+}
+a, .pseudo_a {
+    cursor: pointer;
+    color: #236AB9;
+    text-decoration: none;
+} a:hover, .pseudo_a:hover {
+    text-decoration: underline;
+}
+.box-link {
+    display: block;
+} .lbox-link {
+    display: inline-block;
+} .box-link, .lbox-link {
+    color: inherit;
+    width: auto;
+} .box-link:hover, .lbox-link:hover {
+    text-decoration: none;
+}
+a.fas, a.fas:visited {
+    color: inherit;
+} a.fas:hover {
+    text-decoration: none;
+} a.fas:active {
+
+}
+
+button {
+    border: none;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0);
+    /*padding: 0.4em;*/
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Poppins", Arial, sans-serif;
+    font-weight: bold;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+}
+.h1-wrapper {
+    padding: 0.67em;
+}
+.align-mid {
+    text-align: center;
+}
+
+.whole-width-block {
+    display: block;
+    clear: both;
+    width:100%;
+}
+.container {
+    /*overflow: hidden;*/
+    position: relative;
+}
+.click-tap::after {
+    content: "Tap";
+}
+
+/*@media screen and (min-width: 425px) {*/
+    /*.h1-wrapper {*/
+        /*font-size: 12px;*/
+    /*}*/
+/*}*/
+
+@media screen and (min-width: 768px) {
+    .pseudo_a {
+        text-decoration: none;
+    }
+    a:hover, .pseudo_a:hover {
+        text-decoration: underline;
+    }
+    .click-tap::after {
+        content: "Click";
+    }
+}
+
+/*@media screen and (min-width: 1080px) {*/
+    /*.h1-wrapper {*/
+        /*font-size: 16px;*/
+    /*}*/
+/*}*/
+
+@keyframes rot360 {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
+@font-face {
+    font-family: "Alfa Slab One";
+    src: url("fonts/AlfaSlabOne-Regular.ttf");
+}
+@font-face {
+    font-family: "Poppins";
+    src:
+        url("fonts/Poppins-Medium.ttf"),
+        url("fonts/Poppins-Regular.ttf");
+}
+/*-Other----------------------------------------------*/
+

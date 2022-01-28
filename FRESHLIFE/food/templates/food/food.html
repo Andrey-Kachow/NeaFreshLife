@@ -1,0 +1,70 @@
+{% extends "mainApp/wrapper.html" %}
+{% load staticfiles %} {% load static %}
+{% block title %}Food{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/food.css' %}?v={{ request.user.latest_inputs.random_v }}" type="text/css"/>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/food.js' %}?v={{ request.user.latest_inputs.random_v }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="h1-wrapper">
+    <h1>Learn more about what you eat!</h1>
+</div>
+{% if suggest_list %}
+    <div id="suggestions-opener" class="sug-tr">
+        <h4>
+            <span class="click-tap"></span>
+            <span class="pseudo_a" onclick="openSuggestions()">here</span>
+            to see the food you might like
+        </h4>
+    </div>
+    <div id="suggestions" class="sug-tr">
+        {% for item in suggest_list %}
+            <div class="suggestions__item">
+                {{item.name}}
+                {% include 'food/includes/food-icons.html' %}
+                <img class="addfood-img--suggestion" src="{{ item.image.url }}">
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+<nav id="search__bar">
+    <form class="search__bar__form" method="GET">
+        <input class="search" type="text" name="query"
+               placeholder="Search food"
+               value="{{request.GET.query}}"/>
+        <button class="search" type="submit" value="Search">
+            <i class="fas fa-search"></i>
+        </button>
+    </form>
+</nav>
+<a href="{% url 'food:food' %}"></a>
+{% if query%}
+    <h4 class="results-for-x">Search results for "{{ query }}"</h4>
+{% endif %}
+<div id="search-results"><!--Display searched elements-->
+    {% for item in query_list %} <!--food items-->
+        <div class="food-item"><!--food name and butttons-->
+            <div class="name-n-btns">
+                <div><label class="food-name">{{ item.name }}</label></div>
+                <div>{% include 'food/includes/food-icons.html' %}</div>
+                <div><a href="{% url 'food:food_item' pk=item.pk %}">Learn more...</a></div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+<!--{#    <div class="search__bar__nav"> &lt;!&ndash;navigation buttons div&ndash;&gt;#}-->
+<!--{#        <a href="/">&lt;!&ndash;Main menu button&ndash;&gt;#}-->
+<!--{#            <button class="nav-button" type="button" value="{% url 'food:' pk=item.pk %}">To home page</button>#}-->
+<!--{#        </a>#}-->
+<!--{#        <a href="/planner">&lt;!&ndash;Meal planner button&ndash;&gt;#}-->
+<!--{#            <button class="nav-button" type="button" value="{% url 'food:' pk=item.pk %}">Create meal plan</button>#}-->
+<!--{#        </a>#}-->
+<!--{#    </div> &lt;!&ndash;end of new navigation buttons div&ndash;&gt;#}-->
+
