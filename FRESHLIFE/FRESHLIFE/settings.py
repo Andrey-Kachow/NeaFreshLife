@@ -136,37 +136,3 @@ LOGIN_REDIRECT_URL = '/'
 
 # CSRF_HEADER_NAME = ""
 
-'''
-List of Ideas and To-DOs:
-    
-    0) titles  hnfge
-    
-    1) Food App
-        a. improved search
-            - Style search bar
-            - Categorised search
-            - imporved search filter
-        c. rework nutritional values
-        j. Make the entire webpage responsive 
-        m. remove null=True from Food and exception handling
-    
-    2) Calculator
-        a. Redesign
-            - responsive
-            - Remake bodyfat chart
-        b. Different units (pounds, stones, etc)
-        c. 
-    
-    3) Meal Planner
-        a. Make sure algorithms are reworked for new Food model
-    
-    4) Grid on Main page
-    
-    5) Whole application:
-        a. Move all unnessesary transitions & hovers to pc mediaquery
-        b. ??? loading animations ???
-        
-        
-    
-    
-'''
