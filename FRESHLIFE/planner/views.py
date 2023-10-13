@@ -86,6 +86,11 @@ def create_new_plan(request):
                 portion_size=serving,
             ).save()
 
+def categories_of_food(request):
+    ignored = list(request.user.ignored_food.all())  # ignored food
+    choices = Food.objects.all().exclude(name__in=ignored)
+    return choices.filter(type="Main"), choices.filter(type="Side"),\
+           choices.filter(type="Vegetables"), choices.filter(type="Other")
 
 def meal_planner(request):
     if not request.user.is_authenticated:
