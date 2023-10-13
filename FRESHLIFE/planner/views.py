@@ -8,13 +8,6 @@ from numpy import array
 from scipy.optimize import lsq_linear
 
 
-def categories_of_food(request):
-    ignored = list(request.user.ignored_food.all())  # ignored food
-    choices = Food.objects.all().exclude(name__in=ignored)
-    return choices.filter(type="Main"), choices.filter(type="Side"),\
-           choices.filter(type="Vegetables"), choices.filter(type="Other")
-
-
 def serving_master(prots, fats, carbs, calories, healthscore,
                    Main, Side, Veg, Other=None):
     # Measures to make nutrients non-negative
@@ -62,7 +55,7 @@ def serving_master(prots, fats, carbs, calories, healthscore,
     if calories > 200 or prots > 10 or carbs > 10 or fats > 25:
         # if actual macronutrients values are not close enough
         # to the expected values, another iteration is executed
-        print("ONE MORE ITERATION!")
+        #  print("ONE MORE ITERATION!")
         extra_servings = serving_master(
             prots, fats, carbs,
             calories, healthscore,
